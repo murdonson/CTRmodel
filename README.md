@@ -1,0 +1,70 @@
+# CTRmodel
+CTR prediction model based on pure Spark MLlib, no third-party library.
+
+# Realized Models
+* Naive Bayes
+* Logistic Regression
+* Random Forest
+* Gradient Boosted Decision Tree
+* Neural Network
+* Inner Product Neural Network (IPNN)
+* Outer Product Neural Network (OPNN)
+
+# Dataset
+A small portion of some public database for test and initial debug.
+You can directly get comparision among different models on metrics such as AUC on ROC and P-R curve. <br /><br />
+**Data Format**
+
+        root
+         |-- user_id: integer (user id)
+         |-- item_id: integer (item id)
+         |-- category_id: integer (item category id)
+         |-- content_type: string (item content type)
+         |-- timestamp: string (timestamp)
+         |-- user_item_click: long (the number of user clicked the item)
+         |-- user_item_imp: double (the number of user watched the item)
+         |-- item_ctr: double (historical CTR of the item)
+         |-- is_new_user: integer (is the user a new user)
+         |-- user_embedding: array (embedding of the user, a double array of 50 dimentions)
+         |    |-- element: double
+         |-- item_embedding: array (embedding of the item, a double array of 50 dimentions)
+         |    |-- element: double
+         |-- label: integer (label of the sample 0-negative 1-positive)
+                 
+        Example:
+         
+        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+
+        |user_id|item_id|category_id|content_type| timestamp|user_item_click|user_item_imp| item_ctr|is_new_user|      user_embedding|      item_embedding|label|
+        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+
+        |  20143|     52|         16|       movie|1533487890|              0|      0.69314|0.0061725|          0|[0.06483652442693...|[0.0, 0.0, 0.0, 0...|    0|
+        |  18376|     25|          4|       movie|1533527993|              0|          0.0|0.0138948|          0|[0.02370533533394...|[-0.0905480831861...|    0|
+        |  23643|    150|          6|      series|1533615737|              0|      0.69314|   0.0221|          0|[-0.0905480831861...|[0.11896882951259...|    0|
+        |  60392|    636|         22|      series|1533445757|              0|          0.0|   0.0221|          1|[0.0, 0.0, 0.0, 0...|[0.00568220764398...|    0|
+        +-------+-------+-----------+------------+----------+---------------+-------------+---------+-----------+--------------------+--------------------+-----+         
+# Usage
+It's a maven project. Spark version is 2.3.0. Scala version is 2.11. <br />
+After dependencies are imported by maven automatically, you can simple run the example function (**com.ggstar.example.ModelSelection**) to train all the CTR models and get the metrics comparison among all the models.
+
+# Related Papers on CTR prediction
+* [[GBDT+LR]Practical Lessons from Predicting Clicks on Ads at Facebook.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BGBDT%2BLR%5DPractical%20Lessons%20from%20Predicting%20Clicks%20on%20Ads%20at%20Facebook.pdf) <br />
+* [[FNN]Deep Learning over Multi-field Categorical Data.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BFNN%5DDeep%20Learning%20over%20Multi-field%20Categorical%20Data.pdf) <br />
+* [[Multi-Task]An Overview of Multi-Task Learning in Deep Neural Networks.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BMulti-Task%5DAn%20Overview%20of%20Multi-Task%20Learning%20in%20Deep%20Neural%20Networks.pdf) <br />
+* [[PNN]Product-based Neural Networks for User Response Prediction.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BPNN%5DProduct-based%20Neural%20Networks%20for%20User%20Response%20Prediction.pdf) <br />
+* [[Wide & Deep]Wide & Deep Learning for Recommender Systems.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BWide%20%26%20Deep%5DWide%20%26%20Deep%20Learning%20for%20Recommender%20Systems.pdf) <br />
+* [[DeepFM]- A Factorization-Machine based Neural Network for CTR Prediction.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/%5BDeepFM%5D-%20A%20Factorization-Machine%20based%20Neural%20Network%20for%20CTR%20Prediction.pdf) <br />
+* [Deep Crossing- Web-Scale Modeling without Manually Crafted Combinatorial Features.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Deep%20Crossing-%20Web-Scale%20Modeling%20without%20Manually%20Crafted%20Combinatorial%20Features.pdf) <br />
+* [Learning Piece-wise Linear Models from Large Scale Data for Ad Click Prediction.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Learning%20Piece-wise%20Linear%20Models%20from%20Large%20Scale%20Data%20for%20Ad%20Click%20Prediction.pdf) <br />
+* [Entire Space Multi-Task Model_ An Effective Approach for Estimating Post-Click Conversion Rate.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Entire%20Space%20Multi-Task%20Model_%20An%20Effective%20Approach%20for%20Estimating%20Post-Click%20Conversion%20Rate.pdf) <br />
+* [Deep Interest Network for Click-Through Rate Prediction.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Deep%20Interest%20Network%20for%20Click-Through%20Rate%20Prediction.pdf) <br />
+* [Bid-aware Gradient Descent for Unbiased Learning with Censored Data in Display Advertising.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Bid-aware%20Gradient%20Descent%20for%20Unbiased%20Learning%20with%20Censored%20Data%20in%20Display%20Advertising.pdf) <br />
+* [Ad Click Prediction a View from the Trenches.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Ad%20Click%20Prediction%20a%20View%20from%20the%20Trenches.pdf) <br />
+* [Image Matters- Visually modeling user behaviors using Advanced Model Server.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Image%20Matters-%20Visually%20modeling%20user%20behaviors%20using%20Advanced%20Model%20Server.pdf) <br />
+* [Logistic Regression in Rare Events Data.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Logistic%20Regression%20in%20Rare%20Events%20Data.pdf) <br />
+* [Deep & Cross Network for Ad Click Predictions.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Deep%20%26%20Cross%20Network%20for%20Ad%20Click%20Predictions.pdf) <br />
+* [Learning Deep Structured Semantic Models for Web Search using Clickthrough Data.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Learning%20Deep%20Structured%20Semantic%20Models%20for%20Web%20Search%20using%20Clickthrough%20Data.pdf) <br />
+* [Adaptive Targeting for Online Advertisement.pdf](https://github.com/wzhe06/Ad-papers/blob/master/CTR%20Prediction/Adaptive%20Targeting%20for%20Online%20Advertisement.pdf) <br />
+
+# Other Resources
+* [Papers on Computational Advertising](https://github.com/wzhe06/Ad-papers) <br />
+* [Papers on Recommender System](https://github.com/wzhe06/Ad-papers) <br />
+
